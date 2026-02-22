@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app-new-deployment
+  labels:
+    app: test-app-new
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test-app-new
+  template:
+    metadata:
+      labels:
+        app: test-app-new
+    spec:
+      containers:
+      - name: test-app-new
+        image: ghcr.io/<YOUR_GITHUB_USERNAME>/test-app-new:latest # Placeholder, replaced by GitHub Actions workflow
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"

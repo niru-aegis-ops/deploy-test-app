@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.log
+.Python
+venv/
+.env
+.pytest_cache/
+
+# Docker
+.dockerignore
+
+# Kubernetes
+*.kubeconfig
+*.bak
+
+# IDEs
+.idea/
+.vscode/
